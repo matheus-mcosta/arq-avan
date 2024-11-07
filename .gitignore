@@ -1,3 +1,3 @@
 .DS_Store
-*.csv
-*.o
+**/trab1/*.csv
+**/trab1/*.o
