@@ -7,8 +7,7 @@ LIBS = $(PAPI_PATH)/lib/libpapi.a -lpapi
 
 TARGET = main
 SRCS = main.cpp papito.cpp
-# TARGET = inverted
-# SRCS = inverted.cpp papito.cpp
+
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(TARGET)
