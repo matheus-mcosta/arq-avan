@@ -8,6 +8,8 @@ num_rows = 20_000_000
 id_range = range(100)
 timestamp_range = range(100000000, 100001000)
 
+random.seed(42)
+
 print("Generating data (1/1)")
 # Open a CSV file to write the data
 with open("data.csv", mode="w", newline="") as file:
