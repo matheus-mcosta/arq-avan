@@ -33,9 +33,9 @@ int main(int argc, char *argv[]) {
     // timestamp range(100000000, 100001000)
     if (sscanf(line, "%d,%d,%f,%d", &id, &timestamp, &value, &valid) == 4) {
 
-      if (valid == 1) {
+      if (id % 2 == 0) {
         if ((timestamp > 100000500) && (timestamp < 100000700)) {
-          if (id % 2 == 0) {
+          if (valid == 1) {
             sum += value;
           } else {
             sum -= value;

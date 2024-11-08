@@ -5,29 +5,29 @@ HEADER_SET=false
 EXPECTED=0
 
 benchmark() {
-	local FILE="$1"
-	local SUFFIX="$2"
-	echo "Benchmarking $FILE"
-	for i in {1..10}; do
-		echo "Iteration $i"
-		START_TIME=$(date +%s.%N)
-		local OUTPUT=$(./"$TARGET" "$FILE")
-		END_TIME=$(date +%s.%N)
-		ELAPSED=$(echo "$END_TIME - $START_TIME" | bc)
+    local FILE="$1"
+    local SUFFIX="$2"
+    echo "Benchmarking $FILE"
+    for i in {1..10}; do
+        echo "Iteration $i"
+        START_TIME=$(date +%s.%N)
+        local OUTPUT=$(./"$TARGET" "$FILE")
+        END_TIME=$(date +%s.%N)
+        ELAPSED=$(echo "$END_TIME - $START_TIME" | bc)
 
-		if [ "$HEADER_SET" = false ]; then
-			echo "name,elapsed,$(echo "$OUTPUT" | head -n 1 | awk '{$1=$1; print}' OFS=',')" >output"$SUFFIX".csv
-			HEADER_SET=true
-			EXPECTED=$(echo "$OUTPUT" | tail -n 1)
-		fi
+        if [ "$HEADER_SET" = false ]; then
+            echo "name,elapsed,$(echo "$OUTPUT" | head -n 1 | awk '{$1=$1; print}' OFS=',')" >output_"$TARGET"_"$SUFFIX".csv
+            HEADER_SET=true
+            EXPECTED=$(echo "$OUTPUT" | tail -n 1)
+        fi
 
-		echo "$FILE,$ELAPSED,$(echo "$OUTPUT" | head -n 2 | tail -n 1 | awk '{$1=$1; print}' OFS=',')" >>output"$SUFFIX".csv
-		VALUE=$(echo "$OUTPUT" | tail -n 1)
-		if ! awk "BEGIN {exit !($VALUE == $EXPECTED)}"; then
-			echo "Expected $EXPECTED but got $VALUE"
-			exit 1
-		fi
-	done
+        echo "$FILE,$ELAPSED,$(echo "$OUTPUT" | head -n 2 | tail -n 1 | awk '{$1=$1; print}' OFS=',')" >>output_"$TARGET"_"$SUFFIX".csv
+        VALUE=$(echo "$OUTPUT" | tail -n 1)
+        if ! awk "BEGIN {exit !($VALUE == $EXPECTED)}"; then
+            echo "Expected $EXPECTED but got $VALUE"
+            exit 1
+        fi
+    done
 }
 
 echo "Benchmarking"
