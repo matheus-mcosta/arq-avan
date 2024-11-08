@@ -23,7 +23,7 @@ clean:
 	rm -f $(OBJS) $(TARGET)
 
 generate_data:
-	python data_gen.py
+	python3 data_gen.py
 
 test: $(TARGET)
 	./$(TARGET) "data.csv"

@@ -32,8 +32,7 @@ benchmark() {
 
 echo "Benchmarking"
 
-echo "PAPI_TOT_CYC
-PAPI_TOT_INS
+echo "PAPI_BR_INS
 PAPI_BR_MSP
 PAPI_BR_PRC" >counters.in
 
@@ -45,8 +44,9 @@ benchmark "sorted_valid.csv" 1
 
 echo "PAPI_L1_DCM
 PAPI_L2_DCM
-PAPI_TLB_IM
-PAPI_TLB_DM" >counters.in
+PAPI_TOT_CYC
+PAPI_TOT_INS
+" >counters.in
 
 HEADER_SET=false
 benchmark "data.csv" 2
